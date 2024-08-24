@@ -17,4 +17,5 @@ namespace F::LEGITBOT::AIM
 	void AimAssist(CBaseUserCmdPB* pUserCmd, C_CSPlayerPawn* pLocalPawn, CCSPlayerController* pLocalController);
 	void RCS(CBaseUserCmdPB* pUserCmd, C_CSPlayerPawn* pLocalPawn, CCSPlayerController* pLocalController);
 	void SilentAim(CBaseUserCmdPB* pUserCmd, C_CSPlayerPawn* pLocalPawn, CCSPlayerController* pLocalController);
+	void Triggerbot(CUserCmd* pUserCmd, C_CSPlayerPawn* pLocalPawn, CCSPlayerController* pLocalController);
 }
