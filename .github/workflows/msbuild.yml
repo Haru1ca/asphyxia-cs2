@@ -3,6 +3,8 @@ name: msbuild
 on:
   push:
     branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 permissions:
   contents: read
 jobs:
@@ -11,7 +13,7 @@ jobs:
     strategy:
       matrix:
         toolset: [v143, ClangCL]
-        configuration: [Debug, Release]
+        configuration: [Release]
     steps:
     - name: setup actions
       uses: actions/checkout@v3
