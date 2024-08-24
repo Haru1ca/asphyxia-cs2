@@ -21,16 +21,43 @@ void F::LEGITBOT::AIM::OnMove(CUserCmd* pCmd, CBaseUserCmdPB* pBaseCmd, CCSPlaye
 	// Check if the legitbot is enabled
 	if (!C_GET(bool, Vars.bLegitbot))
 		return;
-
 	if (!pLocalController->IsPawnAlive())
 		return;
-
 	AimAssist(pBaseCmd, pLocalPawn, pLocalController);
 	if (!C_GET(bool, Vars.bSilentbot))
 		return;
 	SilentAim(pBaseCmd, pLocalPawn, pLocalController);
+	if (!C_GET(bool, Vars.bTriggerbot))
+		return;
+	Triggerbot(pCmd, C_BaseEntity* localent, C_BaseEntity* playerent, C_CSPlayerPawn* local, C_CSPlayerPawn* player);
 }
 
+void  F::LEGIT::AIM::Triggerbot(CUserCmd* pUserCmd, C_CSPlayerPawn* pLocalPawn, CCSPlayerController* pLocalController)
+{
+	// Check if the activation key is down
+	if (!IPT::IsKeyDown(C_GET(unsigned int, Vars.nTriggerbotActivationKey)))
+		return;
+    if (!pUserCmd)
+        return;
+    auto base = pUserCmd->m_csgoUserCmd.m_pBaseCmd;
+    if (!base)
+        return;
+	if (!pLocalController->IsPawnAlive())
+		return;
+ 	int  iIDEntIndex     = pLocalPawn->m_iIDEntIndex();
+	if (iIDEntIndex == -1)
+    	return;
+    if ((localPlayerPawn->m_holdTargetIDTimer().m_timestamp() - localPlayerPawn->m_delayTargetIDTimer().m_timestamp() + 0.3) < C_GET(float, Vars.flTriggerbotDelay))
+        return;
+	C_BaseEntity* pEntity = I::GameResourceService->pGameEntitySystem->Get(iIDEntIndex);
+	if (pEntity == nullptr)
+		return;
+	if (pEntity->GetTeam() == 0)
+        return;
+    if (pEntity->GetTeam() == pLocalController->GetTeam())
+        return;
+    cmd->m_nButtons.m_nValue |= IN_ATTACK;
+}
 
 QAngle_t GetRecoil(CBaseUserCmdPB* pCmd,C_CSPlayerPawn* pLocal)
 {
