@@ -121,7 +121,9 @@ struct Variables_t
 	C_ADD_VARIABLE(float, flRCSPitch, 0.0f);
 	C_ADD_VARIABLE(float, flRCSYaw, 0.0f);
 	C_ADD_VARIABLE(float, flRCSSmooth, 5.0f);
-
+	C_ADD_VARIABLE(bool, bTriggerbot, false);
+	C_ADD_VARIABLE(unsigned int, nTriggerbotActivationKey, VK_HOME);
+	C_ADD_VARIABLE(float, flTriggerbotDelay, 5.0f);
 #pragma endregion
 };
 
