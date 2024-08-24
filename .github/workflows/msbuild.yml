@@ -3,8 +3,6 @@ name: msbuild
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 permissions:
   contents: read
 jobs:
@@ -22,3 +20,8 @@ jobs:
     - name: build
       shell: cmd
       run: msbuild asphyxia.sln /p:Configuration=${{matrix.configuration}} /p:Platform=x64 /p:PlatformToolset=${{ matrix.toolset }}
+    - name: Upload the output
+      uses: actions/upload-artifact@main
+      with:
+        name: cstrike-${{github.sha}}.dll
+        path: .\intermediate\cstrike\Release\*.dll
