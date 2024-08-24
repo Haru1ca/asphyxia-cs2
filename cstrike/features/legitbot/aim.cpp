@@ -29,7 +29,7 @@ void F::LEGITBOT::AIM::OnMove(CUserCmd* pCmd, CBaseUserCmdPB* pBaseCmd, CCSPlaye
 	SilentAim(pBaseCmd, pLocalPawn, pLocalController);
 	if (!C_GET(bool, Vars.bTriggerbot))
 		return;
-	Triggerbot(pCmd, C_BaseEntity* localent, C_BaseEntity* playerent, C_CSPlayerPawn* local, C_CSPlayerPawn* player);
+	Triggerbot(pCmd, pLocalPawn, pLocalController);
 }
 
 void  F::LEGIT::AIM::Triggerbot(CUserCmd* pUserCmd, C_CSPlayerPawn* pLocalPawn, CCSPlayerController* pLocalController)
