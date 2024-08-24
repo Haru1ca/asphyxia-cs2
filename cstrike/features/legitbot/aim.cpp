@@ -39,9 +39,6 @@ void  F::LEGIT::AIM::Triggerbot(CUserCmd* pUserCmd, C_CSPlayerPawn* pLocalPawn, 
 		return;
     if (!pUserCmd)
         return;
-    auto base = pUserCmd->m_csgoUserCmd.m_pBaseCmd;
-    if (!base)
-        return;
 	if (!pLocalController->IsPawnAlive())
 		return;
  	int  iIDEntIndex     = pLocalPawn->m_iIDEntIndex();
