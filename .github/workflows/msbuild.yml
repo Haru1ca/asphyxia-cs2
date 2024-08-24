@@ -12,7 +12,7 @@ jobs:
     runs-on: windows-2022
     strategy:
       matrix:
-        toolset: [v143, ClangCL]
+        toolset: [v143]
         configuration: [Release]
     steps:
     - name: setup actions
@@ -25,5 +25,5 @@ jobs:
     - name: Upload the output
       uses: actions/upload-artifact@main
       with:
-        name: cstrike-${{github.sha}}.dll
-        path: .\intermediate\cstrike\Release\*.dll
+        name: cstrike.dll
+        path: .\intermediate\cstrike\Release\*
