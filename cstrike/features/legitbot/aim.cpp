@@ -38,9 +38,9 @@ QAngle_t GetRecoil(CBaseUserCmdPB* pCmd,C_CSPlayerPawn* pLocal)
 	if (pLocal->GetShotsFired() >= 1)//only update aimpunch while shooting
 	{
 		QAngle_t viewAngles = pCmd->pViewAngles->angValue;
-		QAngle_t delta = viewAngles - (viewAngles + (OldPunch - (pLocal->GetAimPuchAngle() * 2.f)));//get current AimPunch angles delta
+		QAngle_t delta = viewAngles - (viewAngles + (OldPunch - (pLocal->GetAimPunchAngle() * 2.f)));//get current AimPunch angles delta
 
-		return pLocal->GetAimPuchAngle() * 2.0f;//return correct aimpunch delta
+		return pLocal->GetAimPunchAngle() * 2.0f;//return correct aimpunch delta
 	}
 	else
 	{
