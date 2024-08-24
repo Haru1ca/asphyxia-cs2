@@ -62,6 +62,27 @@ bool C_CSPlayerPawn::IsOtherEnemy(C_CSPlayerPawn* pOther)
 	return this->GetAssociatedTeam() != pOther->GetAssociatedTeam();
 }
 
+bool C_CSPlayerPawn::InsideCrosshair(C_CSPlayerPawn* target, QAngle_t ang, float range)
+{
+    if (!this || this->GetHealth() <= 0)
+        return false;
+
+
+    trace_filter_t filter = {};
+    I::Trace->Init(filter, target, 0x1C3003, 4, 7);
+
+    game_trace_t trace = {};
+    ray_t ray = {};
+    Vector_t vecForward = { };
+    ang.ToDirections(&vecForward);
+    vecForward *= range;
+    Vector_t vecStart = target->GetEyePosition();
+    Vector_t vecEnd = vecStart + vecForward;
+    I::Trace->TraceShape(ray, &vecStart, &vecEnd, filter, trace);
+
+    return trace.HitEntity && trace.HitEntity->GetRefEHandle().GetEntryIndex() == this->GetRefEHandle().GetEntryIndex();
+}
+
 int C_CSPlayerPawn::GetAssociatedTeam()
 {
 	const int nTeam = this->GetTeam();
