@@ -261,13 +261,15 @@ class C_CSPlayerPawnBase : public C_BasePlayerPawn
 {
 public:
 	CS_CLASS_NO_INITIALIZER(C_CSPlayerPawnBase);
-
+	
 	SCHEMA_ADD_FIELD(CCSPlayer_ViewModelServices*, GetViewModelServices, "C_CSPlayerPawnBase->m_pViewModelServices");
 	SCHEMA_ADD_FIELD(float, GetLowerBodyYawTarget, "C_CSPlayerPawnBase->m_flLowerBodyYawTarget");
 	SCHEMA_ADD_FIELD(float, GetFlashMaxAlpha, "C_CSPlayerPawnBase->m_flFlashMaxAlpha");
 	SCHEMA_ADD_FIELD(float, GetFlashDuration, "C_CSPlayerPawnBase->m_flFlashDuration");
 	SCHEMA_ADD_FIELD(Vector_t, GetLastSmokeOverlayColor, "C_CSPlayerPawnBase->m_vLastSmokeOverlayColor");
 	SCHEMA_ADD_FIELD(int, GetSurvivalTeam, "C_CSPlayerPawnBase->m_nSurvivalTeam"); // danger zone
+
+	SCHEMA_ADD_FIELD(int, m_iIDEntIndex, "C_CSPlayerPawnBase->m_iIDEntIndex");
 };
 
 class C_CSPlayerPawn : public C_CSPlayerPawnBase
