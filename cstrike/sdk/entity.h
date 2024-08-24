@@ -275,6 +275,7 @@ class C_CSPlayerPawn : public C_CSPlayerPawnBase
 public:
 	CS_CLASS_NO_INITIALIZER(C_CSPlayerPawn);
 
+	bool InsideCrosshair(C_CSPlayerPawn* local, QAngle_t ang, float range);
 	[[nodiscard]] bool IsOtherEnemy(C_CSPlayerPawn* pOther);
 	[[nodiscard]] int GetAssociatedTeam();
 	[[nodiscard]] bool CanAttack(const float flServerTime);
