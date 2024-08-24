@@ -44,7 +44,7 @@ void  F::LEGIT::AIM::Triggerbot(CUserCmd* pUserCmd, C_CSPlayerPawn* pLocalPawn, 
  	int  iIDEntIndex     = pLocalPawn->m_iIDEntIndex();
 	if (iIDEntIndex == -1)
     	return;
-    if ((localPlayerPawn->m_holdTargetIDTimer().m_timestamp() - localPlayerPawn->m_delayTargetIDTimer().m_timestamp() + 0.3) < C_GET(float, Vars.flTriggerbotDelay))
+    if ((pLocalPawn->m_holdTargetIDTimer().m_timestamp() - pLocalPawn->m_delayTargetIDTimer().m_timestamp() + 0.3) < C_GET(float, Vars.flTriggerbotDelay))
         return;
 	C_BaseEntity* pEntity = I::GameResourceService->pGameEntitySystem->Get(iIDEntIndex);
 	if (pEntity == nullptr)
@@ -53,7 +53,7 @@ void  F::LEGIT::AIM::Triggerbot(CUserCmd* pUserCmd, C_CSPlayerPawn* pLocalPawn, 
         return;
     if (pEntity->GetTeam() == pLocalController->GetTeam())
         return;
-    cmd->m_nButtons.m_nValue |= IN_ATTACK;
+    pUserCmd->m_nButtons.m_nValue |= IN_ATTACK;
 }
 
 QAngle_t GetRecoil(CBaseUserCmdPB* pCmd,C_CSPlayerPawn* pLocal)
