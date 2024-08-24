@@ -32,7 +32,7 @@ void F::LEGITBOT::AIM::OnMove(CUserCmd* pCmd, CBaseUserCmdPB* pBaseCmd, CCSPlaye
 	Triggerbot(pCmd, pLocalPawn, pLocalController);
 }
 
-void  F::LEGIT::AIM::Triggerbot(CUserCmd* pUserCmd, C_CSPlayerPawn* pLocalPawn, CCSPlayerController* pLocalController)
+void  F::LEGITBOT::AIM::Triggerbot(CUserCmd* pUserCmd, C_CSPlayerPawn* pLocalPawn, CCSPlayerController* pLocalController)
 {
 	// Check if the activation key is down
 	if (!IPT::IsKeyDown(C_GET(unsigned int, Vars.nTriggerbotActivationKey)))
@@ -53,7 +53,7 @@ void  F::LEGIT::AIM::Triggerbot(CUserCmd* pUserCmd, C_CSPlayerPawn* pLocalPawn, 
         return;
     if (pEntity->GetTeam() == pLocalController->GetTeam())
         return;
-    pUserCmd->m_nButtons.m_nValue |= IN_ATTACK;
+    pUserCmd->nButtons.nValue |= IN_ATTACK;
 }
 
 QAngle_t GetRecoil(CBaseUserCmdPB* pCmd,C_CSPlayerPawn* pLocal)
