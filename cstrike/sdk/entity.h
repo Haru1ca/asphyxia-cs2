@@ -257,6 +257,12 @@ public:
 
 class CCSPlayer_ViewModelServices;
 
+class CountdownTimer
+{
+public:
+    SCHEMA_ADD_FIELD(float, m_timestamp, "CountdownTimer->m_timestamp");
+};
+
 class C_CSPlayerPawnBase : public C_BasePlayerPawn
 {
 public:
@@ -270,6 +276,8 @@ public:
 	SCHEMA_ADD_FIELD(int, GetSurvivalTeam, "C_CSPlayerPawnBase->m_nSurvivalTeam"); // danger zone
 
 	SCHEMA_ADD_FIELD(int, m_iIDEntIndex, "C_CSPlayerPawnBase->m_iIDEntIndex");
+	SCHEMA_ADD_FIELD(CountdownTimer, m_delayTargetIDTimer, "C_CSPlayerPawnBase->m_delayTargetIDTimer");
+    SCHEMA_ADD_FIELD(CountdownTimer, m_holdTargetIDTimer, "C_CSPlayerPawnBase->m_holdTargetIDTimer");
 };
 
 class C_CSPlayerPawn : public C_CSPlayerPawnBase
