@@ -402,7 +402,7 @@ void T::LegitBot()
 			ImGui::Checkbox(CS_XOR("enable##triggerbot"), &C_GET(bool, Vars.bTriggerbot));
 			ImGui::SliderFloat(CS_XOR("delay"), &C_GET(float, Vars.flTriggerbotDelay), 0.1f, 1.0f);
 			ImGui::NewLine();
-			ImGui::HotKey(CS_XOR("toggle key"), &C_GET(unsigned int, Vars.nLegitbotActivationKey));
+			ImGui::HotKey(CS_XOR("toggle key"), &C_GET(unsigned int, Vars.nTriggerbotActivationKey));
 			ImGui::PopStyleVar();
 		}
 		ImGui::EndChild();
@@ -785,7 +785,7 @@ void menu::render()
 	MENU::UpdateStyle(&style);
 
 	// @test: we should always update the animation?
-	animMenuDimBackground.Update(io.DeltaTime, style.AnimationSpeed);
+/*	animMenuDimBackground.Update(io.DeltaTime, style.AnimationSpeed);
 	if (!bMainWindowOpened)
 		return;
 
@@ -805,8 +805,8 @@ void menu::render()
 			menuParticle.Render(ImGui::GetBackgroundDrawList(), vecScreenSize, flBackgroundAlpha);
 	}
 
-	ImGui::PushStyleVar(ImGuiStyleVar_Alpha, flBackgroundAlpha);
-	//ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(720, 355));
+	ImGui::PushStyleVar(ImGuiStyleVar_Alpha, flBackgroundAlpha);*/
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(720, 355));
 
 	ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x / 2.f, io.DisplaySize.y / 2.f), ImGuiCond_Once, ImVec2(0.5f, 0.5f));
 	ImGui::SetNextWindowSize(ImVec2(720 * MENU::flDpiScale, 355 * MENU::flDpiScale), ImGuiCond_Always);
@@ -855,7 +855,7 @@ void menu::render()
 			ImGui::Checkbox(CS_XOR("enable##triggerbot"), &C_GET(bool, Vars.bTriggerbot));
 			ImGui::SliderFloat(CS_XOR("delay"), &C_GET(float, Vars.flTriggerbotDelay), 0.1f, 1.0f);
 			ImGui::NewLine();
-			ImGui::HotKey(CS_XOR("toggle key"), &C_GET(unsigned int, Vars.nLegitbotActivationKey));
+			ImGui::HotKey(CS_XOR("toggle key"), &C_GET(unsigned int, Vars.nTriggerbotActivationKey));
 		}
 		ImGui::EndChild();
 
