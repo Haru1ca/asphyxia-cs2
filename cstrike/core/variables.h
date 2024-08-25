@@ -59,7 +59,7 @@ struct Variables_t
 
 	C_ADD_VARIABLE(bool, bVisualChams, false);
 	C_ADD_VARIABLE(int, nVisualChamMaterial, VISUAL_MATERIAL_PRIMARY_WHITE);
-	C_ADD_VARIABLE(bool, bVisualChamsIgnoreZ, false); // invisible chams
+	C_ADD_VARIABLE(bool, bVisualChamsIgnoreZ, true); // invisible chams
 	C_ADD_VARIABLE(Color_t, colVisualChams, Color_t(0, 255, 0));
 	C_ADD_VARIABLE(Color_t, colVisualChamsIgnoreZ, Color_t(255, 0, 0));
 #pragma endregion
