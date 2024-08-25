@@ -119,11 +119,11 @@ void MENU::RenderMainWindow()
 		pDrawList->AddText(ImVec2(vecMenuPos.x + vecMenuSize.x - style.WindowPadding.x - vecTitleSize.x, vecMenuPos.y + style.WindowPadding.y), ImGui::GetColorU32(ImGuiCol_Text), CS_XOR("asphyxia"));
 
 		static const CTab arrTabs[] = {
-			{ "ragebot", &T::RageBot },
+			//{ "ragebot", &T::RageBot },
 			{ "legitbot", &T::LegitBot },
 			{ "visuals", &T::Visuals },
 			{ "miscellaneous", &T::Miscellaneous },
-			{ "skins changer", &T::SkinsChanger }
+			//{ "skins changer", &T::SkinsChanger }
 		};
 
 		T::Render(CS_XOR("##main_tabs"), arrTabs, CS_ARRAYSIZE(arrTabs), &nCurrentMainTab);
@@ -478,7 +478,7 @@ void T::Miscellaneous()
 {
 	ImGuiStyle& style = ImGui::GetStyle();
 
-	ImGui::Columns(2, CS_XOR("##misc_collumns"), false);
+	ImGui::Columns(1, CS_XOR("##misc_collumns"), false);
 	{
 		ImGui::BeginChild(CS_XOR("misc.general"), ImVec2(0, ImGui::GetContentRegionAvail().y / 2.f), true, ImGuiWindowFlags_MenuBar);
 		{
@@ -492,12 +492,12 @@ void T::Miscellaneous()
 
 			ImGui::Checkbox(CS_XOR("watermark"), &C_GET(bool, Vars.bWatermark));
 
-			ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.f, 1.f, 0.f, 1.f));
+			/*ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.f, 1.f, 0.f, 1.f));
 			if (ImGui::Button(CS_XOR("unlock hidden cvars"), ImVec2(-1, 15 * MENU::flDpiScale)))
 			{
 				I::Cvar->UnlockHiddenCVars();
 				NOTIFY::Push({ N_TYPE_INFO, CS_XOR("unlocked all hidden cvars") });
-			}
+			}*/
 
 			ImGui::PopStyleColor();
 
@@ -525,7 +525,7 @@ void T::Miscellaneous()
 		}
 		ImGui::EndChild();
 	}
-	ImGui::NextColumn();
+	/*ImGui::NextColumn();
 	{
 		static int nCurrentSettingSubTab = 0;
 		ImGui::BeginChild(CS_XOR("misc.settings"), ImVec2(0, ImGui::GetContentRegionAvail().y / 2.f), true, ImGuiWindowFlags_MenuBar);
@@ -687,7 +687,7 @@ void T::Miscellaneous()
 			Render(CS_XOR("##misc.setttings.tab"), arrSettingTabs, CS_ARRAYSIZE(arrSettingTabs), &nCurrentSettingSubTab);
 		}
 		ImGui::EndChild();
-	}
+	}*/
 	ImGui::Columns(1);
 }
 
