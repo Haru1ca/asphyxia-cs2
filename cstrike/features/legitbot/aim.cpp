@@ -37,8 +37,6 @@ void  F::LEGITBOT::AIM::Triggerbot(CBaseUserCmdPB* pCmd, C_CSPlayerPawn* pLocalP
 	// Check if the activation key is down
 	if (!IPT::IsKeyDown(C_GET(unsigned int, Vars.nTriggerbotActivationKey)))
 		return;
-	if (!pLocalController->IsPawnAlive())
-		return;
     if ((pLocalPawn->m_holdTargetIDTimer().m_timestamp() - pLocalPawn->m_delayTargetIDTimer().m_timestamp() + 0.3) < C_GET(float, Vars.flTriggerbotDelay))
         return;
 	GameTrace_t trace = GameTrace_t();
