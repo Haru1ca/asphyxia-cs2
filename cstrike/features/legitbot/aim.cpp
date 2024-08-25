@@ -47,7 +47,10 @@ void  F::LEGITBOT::AIM::Triggerbot(CBaseUserCmdPB* pCmd, C_CSPlayerPawn* pLocalP
 	QAngle_t vCurAngle = pCmd->pViewAngles->angValue;
 	Vector_t vecForward = { };
     vCurAngle.ToDirections(&vecForward);
-    vecForward *= range;
+	auto weapon = pLocalPawn->GetActiveWeapon();
+    if (!weapon)
+        return;
+    vecForward *= weapon->GetRange();
     Vector_t vecStart = pLocalPawn->GetEyePosition();
     Vector_t vecEnd = vecStart + vecForward;
 	I::GameTraceManager->TraceShape(&ray, vecStart, vecEnd, &filter, &trace);
