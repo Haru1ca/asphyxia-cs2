@@ -106,7 +106,7 @@ void MENU::RenderMainWindow()
 	}
 
 	// render main window
-	ImGui::Begin(CS_XOR("asphyxia"), &bMainWindowOpened, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoCollapse);
+	ImGui::Begin(CS_XOR(""), &bMainWindowOpened, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoCollapse);
 	{
 		const ImVec2 vecMenuPos = ImGui::GetWindowPos();
 		const ImVec2 vecMenuSize = ImGui::GetWindowSize();
@@ -458,11 +458,6 @@ void T::Visuals()
 
 			ImGui::Checkbox(CS_XOR("enable##chams"), &C_GET(bool, Vars.bVisualChams));
 			ImGui::Combo(CS_XOR("materials"), &C_GET(int, Vars.nVisualChamMaterial), CS_XOR("white\0illuminate\0"));
-			ImGui::Checkbox(CS_XOR("enable invisible chams##chams"), &C_GET(bool, Vars.bVisualChamsIgnoreZ));
-
-			ImGui::ColorEdit4(CS_XOR("visible color"), &C_GET(Color_t, Vars.colVisualChams));
-			if (C_GET(bool, Vars.bVisualChamsIgnoreZ))
-				ImGui::ColorEdit4(CS_XOR("invisible color"), &C_GET(Color_t, Vars.colVisualChamsIgnoreZ));
 
 			ImGui::PopStyleVar();
 		}
@@ -933,7 +928,7 @@ void menu::render()
 			}
 
 			if (const auto& nameOverlayConfig = C_GET(TextOverlayVar_t, Vars.overlayName); nameOverlayConfig.bEnable)
-				context.AddComponent(new CTextComponent(true, SIDE_TOP, DIR_TOP, FONT::pVisual, CS_XOR("asphyxia"), Vars.overlayName));
+				context.AddComponent(new CTextComponent(true, SIDE_TOP, DIR_TOP, FONT::pVisual, CS_XOR("Player"), Vars.overlayName));
 
 			if (const auto& healthOverlayConfig = C_GET(BarOverlayVar_t, Vars.overlayHealthBar); healthOverlayConfig.bEnable)
 			{
