@@ -100,7 +100,26 @@ std::uint16_t C_CSPlayerPawn::GetCollisionMask()
 
 	return 0;
 }
+bool C_CSPlayerPawn::InsideCrosshair(C_CSPlayerPawn* target, QAngle_t ang, float range)
+{
+    if (!this || this->GetHealth() <= 0)
+        return false;
 
+
+    TraceFilter_t  filter = {};
+    I::GameTraceManager->Init(filter, target, 0x1C3003, 4, 7);
+
+    GameTrace_t  trace = {};
+    Ray_t ray = {};
+    Vector_t vecForward = { };
+    ang.ToDirections(&vecForward);
+    vecForward *= range;
+    Vector_t vecStart = target->GetEyePosition();
+    Vector_t vecEnd = vecStart + vecForward;
+    I::GameTraceManager->TraceShape(ray, &vecStart, &vecEnd, filter, trace);
+
+    return trace.HitEntity && trace.HitEntity->GetRefEHandle().GetEntryIndex() == this->GetRefEHandle().GetEntryIndex();
+}
 bool C_CSWeaponBaseGun::CanPrimaryAttack(const int nWeaponType, const float flServerTime)
 {
 	// check are weapon support burst mode and it's ready to attack
