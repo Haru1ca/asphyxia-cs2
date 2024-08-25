@@ -19,9 +19,9 @@
 void F::LEGITBOT::AIM::OnMove(CUserCmd* pCmd, CBaseUserCmdPB* pBaseCmd, CCSPlayerController* pLocalController, C_CSPlayerPawn* pLocalPawn)
 {
 	// Check if the legitbot is enabled
-	if (!C_GET(bool, Vars.bLegitbot))
-		return;
 	if (!pLocalController->IsPawnAlive())
+		return;
+	if (!C_GET(bool, Vars.bLegitbot))
 		return;
 	AimAssist(pBaseCmd, pLocalPawn, pLocalController);
 	if (!C_GET(bool, Vars.bSilentbot))
@@ -37,8 +37,8 @@ void  F::LEGITBOT::AIM::Triggerbot(CBaseUserCmdPB* pCmd, C_CSPlayerPawn* pLocalP
 	// Check if the activation key is down
 	if (!IPT::IsKeyDown(C_GET(unsigned int, Vars.nTriggerbotActivationKey)))
 		return;
-    if ((pLocalPawn->m_holdTargetIDTimer().m_timestamp() - pLocalPawn->m_delayTargetIDTimer().m_timestamp() + 0.3) < C_GET(float, Vars.flTriggerbotDelay))
-        return;
+    /*if ((pLocalPawn->m_holdTargetIDTimer().m_timestamp() - pLocalPawn->m_delayTargetIDTimer().m_timestamp() + 0.3) < C_GET(float, Vars.flTriggerbotDelay))
+        return;*/
 	GameTrace_t trace = GameTrace_t();
 	TraceFilter_t filter = TraceFilter_t(0x1C3003, pLocalPawn, nullptr, 4);
 	Ray_t ray = Ray_t();
