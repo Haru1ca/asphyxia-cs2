@@ -107,7 +107,7 @@ bool C_CSPlayerPawn::InsideCrosshair(C_CSPlayerPawn* target, QAngle_t ang, float
 
 
     TraceFilter_t  filter = {};
-    I::GameTraceManager->Init(filter, target, 0x1C3003, 4, 7);
+    I::GameTraceManager->TraceFilter_t(filter, target, 0x1C3003, 4, 7);
 
     GameTrace_t  trace = {};
     Ray_t ray = {};
@@ -116,9 +116,9 @@ bool C_CSPlayerPawn::InsideCrosshair(C_CSPlayerPawn* target, QAngle_t ang, float
     vecForward *= range;
     Vector_t vecStart = target->GetEyePosition();
     Vector_t vecEnd = vecStart + vecForward;
-    I::GameTraceManager->TraceShape(ray, &vecStart, &vecEnd, filter, trace);
+    I::GameTraceManager->TraceShape(&ray, &vecStart, &vecEnd, filter, trace);
 
-    return trace.HitEntity && trace.HitEntity->GetRefEHandle().GetEntryIndex() == this->GetRefEHandle().GetEntryIndex();
+    return trace.m_pHitEntity && trace.m_pHitEntity->GetRefEHandle().GetEntryIndex() == this->GetRefEHandle().GetEntryIndex();
 }
 bool C_CSWeaponBaseGun::CanPrimaryAttack(const int nWeaponType, const float flServerTime)
 {
