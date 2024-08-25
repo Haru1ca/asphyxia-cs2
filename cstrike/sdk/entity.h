@@ -25,6 +25,7 @@
 // used: entity vdata
 #include "vdata.h"
 
+#include "interfaces/cgametracemanager.h"
 using GameTime_t = std::float_t;
 using GameTick_t = std::int32_t;
 
