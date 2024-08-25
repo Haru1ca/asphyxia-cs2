@@ -29,10 +29,10 @@ void F::LEGITBOT::AIM::OnMove(CUserCmd* pCmd, CBaseUserCmdPB* pBaseCmd, CCSPlaye
 	SilentAim(pBaseCmd, pLocalPawn, pLocalController);
 	if (!C_GET(bool, Vars.bTriggerbot))
 		return;
-	Triggerbot(pCmd, pLocalPawn, pLocalController);
+	Triggerbot(pBaseCmd, pLocalPawn, pLocalController);
 }
 
-void  F::LEGITBOT::AIM::Triggerbot(CUserCmd* pUserCmd, C_CSPlayerPawn* pLocalPawn, CCSPlayerController* pLocalController)
+void  F::LEGITBOT::AIM::Triggerbot(CBaseUserCmdPB* pCmd, C_CSPlayerPawn* pLocalPawn, CCSPlayerController* pLocalController)
 {
 	// Check if the activation key is down
 	if (!IPT::IsKeyDown(C_GET(unsigned int, Vars.nTriggerbotActivationKey)))
@@ -44,9 +44,9 @@ void  F::LEGITBOT::AIM::Triggerbot(CUserCmd* pUserCmd, C_CSPlayerPawn* pLocalPaw
 	GameTrace_t trace = GameTrace_t();
 	TraceFilter_t filter = TraceFilter_t(0x1C3003, pLocalPawn, nullptr, 4);
 	Ray_t ray = Ray_t();
-
+	QAngle_t vCurAngle = pCmd->pViewAngles->angValue;
 	Vector_t vecForward = { };
-    ang.ToDirections(&vecForward);
+    vCurAngle.ToDirections(&vecForward);
     vecForward *= range;
     Vector_t vecStart = pLocalPawn->GetEyePosition();
     Vector_t vecEnd = vecStart + vecForward;
