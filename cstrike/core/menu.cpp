@@ -793,16 +793,16 @@ void menu::render()
 
 	ImGui::BeginTabBar(CS_XOR("Tabs"));
 
-	if (ImGui::BeginTabItem(CS_XOR("rage")))
+/*	if (ImGui::BeginTabItem(CS_XOR("rage")))
 	{
 		ImGui::EndTabItem();
-	}
+	}*/
 
 	if (ImGui::BeginTabItem(CS_XOR("legit")))
 	{
 		ImVec2 child_size = ImVec2((ImGui::GetColumnWidth() - (style.ItemSpacing.x * 2)) / 3, ImGui::GetWindowHeight() - (ImGui::GetCursorPosY() + style.ItemInnerSpacing.y * 2));
 
-		ImGui::BeginChild(CS_XOR("Globals"), child_size);
+		ImGui::BeginChild(CS_XOR("Aimbot"), child_size);
 		{
 			ImGui::Checkbox(CS_XOR("enable##aimbot"), &C_GET(bool, Vars.bLegitbot));
 			ImGui::SliderFloat(CS_XOR("aim range"), &C_GET(float, Vars.flAimRange), 0.f, 135.f);
@@ -827,9 +827,13 @@ void menu::render()
 
 		ImGui::SameLine();
 
-		ImGui::BeginChild(CS_XOR("Visuals"), child_size);
+		ImGui::BeginChild(CS_XOR("Triggerbot"), child_size);
 		{
 
+			ImGui::Checkbox(CS_XOR("enable##triggerbot"), &C_GET(bool, Vars.bTriggerbot));
+			ImGui::SliderFloat(CS_XOR("delay"), &C_GET(float, Vars.flTriggerbotDelay), 0.1f, 1.0f);
+			ImGui::NewLine();
+			ImGui::HotKey(CS_XOR("toggle key"), &C_GET(unsigned int, Vars.nLegitbotActivationKey));
 		}
 		ImGui::EndChild();
 
@@ -955,11 +959,11 @@ void menu::render()
 			ImGui::Checkbox(CS_XOR("watermark"), &C_GET(bool, Vars.bWatermark));
 
 			ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.f, 1.f, 0.f, 1.f));
-			if (ImGui::Button(CS_XOR("unlock hidden cvars"), ImVec2(-1, 15 * MENU::flDpiScale)))
+			/*if (ImGui::Button(CS_XOR("unlock hidden cvars"), ImVec2(-1, 15 * MENU::flDpiScale)))
 			{
 				I::Cvar->UnlockHiddenCVars();
 				NOTIFY::Push({ N_TYPE_INFO, CS_XOR("unlocked all hidden cvars") });
-			}
+			}*/
 
 			ImGui::PopStyleColor();
 
@@ -986,12 +990,12 @@ void menu::render()
 		ImGui::EndTabItem();
 	}
 
-	if (BeginTabItem(CS_XOR("skins")))
+/*	if (BeginTabItem(CS_XOR("skins")))
 	{
 		EndTabItem();
-	}
+	}*/
 
-	if (BeginTabItem(CS_XOR("settings")))
+/*	if (BeginTabItem(CS_XOR("settings")))
 	{
 		ImVec2 child_size = ImVec2((GetColumnWidth() - (style.ItemSpacing.x * 2)) / 3, GetWindowHeight() - (GetCursorPosY() + style.ItemInnerSpacing.y * 2));
 
@@ -1154,7 +1158,7 @@ void menu::render()
 		ImGui::EndChild();
 
 		ImGui::EndTabItem();
-	}
+	}*/
 
 	ImGui::EndTabBar();
 	ImGui::End();
