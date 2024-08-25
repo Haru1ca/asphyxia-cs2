@@ -39,18 +39,21 @@ void  F::LEGITBOT::AIM::Triggerbot(CUserCmd* pUserCmd, C_CSPlayerPawn* pLocalPaw
 		return;
 	if (!pLocalController->IsPawnAlive())
 		return;
- 	int iIDEntIndex = pLocalPawn->m_iIDEntIndex();
-	if (iIDEntIndex == -1)
-    	return;
     if ((pLocalPawn->m_holdTargetIDTimer().m_timestamp() - pLocalPawn->m_delayTargetIDTimer().m_timestamp() + 0.3) < C_GET(float, Vars.flTriggerbotDelay))
         return;
-	C_BaseEntity* pEntity = I::GameResourceService->pGameEntitySystem->Get(iIDEntIndex);
-	if (pEntity == nullptr)
+	GameTrace_t trace = GameTrace_t();
+	TraceFilter_t filter = TraceFilter_t(0x1C3003, pLocalPawn, nullptr, 4);
+	Ray_t ray = Ray_t();
+
+	Vector_t vecForward = { };
+    ang.ToDirections(&vecForward);
+    vecForward *= range;
+    Vector_t vecStart = pLocalPawn->GetEyePosition();
+    Vector_t vecEnd = vecStart + vecForward;
+	I::GameTraceManager->TraceShape(&ray, vecStart, vecEnd, &filter, &trace);
+	if (!trace.m_pHitEntity || trace.m_pHitEntity->GetRefEHandle().GetEntryIndex() != this->GetRefEHandle().GetEntryIndex())// if invisible, skip this entity
 		return;
-	if (pEntity->GetTeam() == 0)
-        return;
-    if (pEntity->GetTeam() == pLocalController->GetTeam())
-        return;
+
     I::Input->GetUserCmd()->csgoUserCmd.pBaseCmd->pInButtonState->nValue |= IN_ATTACK;
 }
 
