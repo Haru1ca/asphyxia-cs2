@@ -63,7 +63,7 @@ void  F::LEGITBOT::AIM::Triggerbot(CBaseUserCmdPB* pCmd, C_CSPlayerPawn* pLocalP
     Vector_t vecStart = pLocalPawn->GetEyePosition();
     Vector_t vecEnd = vecStart + vecForward;
 	I::GameTraceManager->TraceShape(&ray, vecStart, vecEnd, &filter, &trace);
-	if (!trace.m_pHitEntity || trace.m_pHitEntity->GetRefEHandle().GetEntryIndex() != this->GetRefEHandle().GetEntryIndex())// if invisible, skip this entity
+	if (!trace.m_pHitEntity || trace.m_pHitEntity->GetRefEHandle().GetEntryIndex() != pLocalPawn->GetRefEHandle().GetEntryIndex())// if invisible, skip this entity
 		return;
 
     I::Input->GetUserCmd()->csgoUserCmd.pBaseCmd->pInButtonState->nValue |= IN_ATTACK;
