@@ -388,25 +388,24 @@ void T::LegitBot()
 
 	}
 	ImGui::NextColumn();
-	{ /*
-		ImGui::BeginChild(CS_XOR("legitbot.RCS"), ImVec2{}, true, ImGuiWindowFlags_MenuBar);
+	{ 
+		
+		ImGui::BeginChild(CS_XOR("legitbot.triggerbot"), ImVec2{}, true, ImGuiWindowFlags_MenuBar);
 		{
+			
 			if (ImGui::BeginMenuBar())
 			{
-				ImGui::TextUnformatted(CS_XOR("RCS"));
+				ImGui::TextUnformatted(CS_XOR("triggerbot"));
 				ImGui::EndMenuBar();
 			}
-
 			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(style.FramePadding.x, 0));
-
-			ImGui::Checkbox(CS_XOR("standalone RCS"), &C_GET(bool, Vars.bRCS));
-			ImGui::SliderFloat(CS_XOR("pitch scale"), &C_GET(float, Vars.flRCSPitch), 0.f, 2.f);
-			ImGui::SliderFloat(CS_XOR("yaw scale"), &C_GET(float, Vars.flRCSYaw), 0.f, 2.f);
-			ImGui::SliderFloat(CS_XOR("smooth"), &C_GET(float, Vars.flRCSSmooth), 1.f, 100.f);
-
+			ImGui::Checkbox(CS_XOR("enable##triggerbot"), &C_GET(bool, Vars.bTriggerbot));
+			ImGui::SliderFloat(CS_XOR("delay"), &C_GET(float, Vars.flTriggerbotDelay), 0.1f, 1.0f);
+			ImGui::NewLine();
+			ImGui::HotKey(CS_XOR("toggle key"), &C_GET(unsigned int, Vars.nLegitbotActivationKey));
 			ImGui::PopStyleVar();
 		}
-		ImGui::EndChild();*/
+		ImGui::EndChild();
 	}
 	ImGui::Columns(1);
 }
