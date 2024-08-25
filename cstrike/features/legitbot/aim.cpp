@@ -47,10 +47,15 @@ void  F::LEGITBOT::AIM::Triggerbot(CBaseUserCmdPB* pCmd, C_CSPlayerPawn* pLocalP
 	QAngle_t vCurAngle = pCmd->pViewAngles->angValue;
 	Vector_t vecForward = { };
     vCurAngle.ToDirections(&vecForward);
-	auto weapon = pLocalPawn->GetActiveWeapon();
-    if (!weapon)
+
+    CPlayer_WeaponServices* WeaponServices = I::GameResourceService->GetWeaponServices();
+    if (!WeaponServices)
         return;
-	auto data = weapon->GetWeaponVData();
+    C_CSWeaponBase* ActiveWeapon = I::GameResourceService->pGameEntitySystem->Get<C_CSWeaponBase>(WeaponServices->m_hActiveWeapon());
+
+    if (!ActiveWeapon)
+        return;
+	auto data = ActiveWeapon->GetWeaponVData();
     if (!data)
         return;
 	
