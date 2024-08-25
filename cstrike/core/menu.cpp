@@ -353,7 +353,7 @@ void T::RageBot()
 void T::LegitBot()
 {
 	ImGuiStyle& style = ImGui::GetStyle();
-	ImGui::Columns(2, CS_XOR("##legit_collumns"), false);
+	ImGui::Columns(1, CS_XOR("##legit_collumns"), false);
 	{
 		ImGui::BeginChild(CS_XOR("legitbot.aimbot"), ImVec2{}, true, ImGuiWindowFlags_MenuBar);
 		{
@@ -384,7 +384,7 @@ void T::LegitBot()
 		ImGui::EndChild();
 
 	}
-	ImGui::NextColumn();
+	/*ImGui::NextColumn();
 	{ 
 		
 		ImGui::BeginChild(CS_XOR("legitbot.triggerbot"), ImVec2{}, true, ImGuiWindowFlags_MenuBar);
@@ -403,7 +403,7 @@ void T::LegitBot()
 			ImGui::PopStyleVar();
 		}
 		ImGui::EndChild();
-	}
+	}*/
 	ImGui::Columns(1);
 }
 
