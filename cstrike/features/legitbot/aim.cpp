@@ -37,11 +37,9 @@ void  F::LEGITBOT::AIM::Triggerbot(CUserCmd* pUserCmd, C_CSPlayerPawn* pLocalPaw
 	// Check if the activation key is down
 	if (!IPT::IsKeyDown(C_GET(unsigned int, Vars.nTriggerbotActivationKey)))
 		return;
-    if (!pUserCmd)
-        return;
 	if (!pLocalController->IsPawnAlive())
 		return;
- 	int  iIDEntIndex     = pLocalPawn->m_iIDEntIndex();
+ 	int iIDEntIndex = pLocalPawn->m_iIDEntIndex();
 	if (iIDEntIndex == -1)
     	return;
     if ((pLocalPawn->m_holdTargetIDTimer().m_timestamp() - pLocalPawn->m_delayTargetIDTimer().m_timestamp() + 0.3) < C_GET(float, Vars.flTriggerbotDelay))
@@ -53,7 +51,7 @@ void  F::LEGITBOT::AIM::Triggerbot(CUserCmd* pUserCmd, C_CSPlayerPawn* pLocalPaw
         return;
     if (pEntity->GetTeam() == pLocalController->GetTeam())
         return;
-    pUserCmd->nButtons.nValue |= IN_ATTACK;
+    I::Input->GetUserCmd()->csgoUserCmd.pBaseCmd->pInButtonState->nValue |= IN_ATTACK;
 }
 
 QAngle_t GetRecoil(CBaseUserCmdPB* pCmd,C_CSPlayerPawn* pLocal)
