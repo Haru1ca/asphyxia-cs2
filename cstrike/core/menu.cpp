@@ -106,7 +106,7 @@ void MENU::RenderMainWindow()
 	}
 
 	// render main window
-	ImGui::Begin(CS_XOR(""), &bMainWindowOpened, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoCollapse);
+	ImGui::Begin(CS_XOR("asphyxia"), &bMainWindowOpened, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoCollapse);
 	{
 		const ImVec2 vecMenuPos = ImGui::GetWindowPos();
 		const ImVec2 vecMenuSize = ImGui::GetWindowSize();
@@ -114,9 +114,6 @@ void MENU::RenderMainWindow()
 
 		if (C_GET(unsigned int, Vars.bMenuAdditional) & MENU_ADDITION_GLOW)
 			D::AddDrawListShadowRect(ImGui::GetBackgroundDrawList(), vecMenuPos, vecMenuPos + vecMenuSize, C_GET(ColorPickerVar_t, Vars.colAccent0).colValue, 64.f * flDpiScale, style.WindowRounding, ImDrawFlags_ShadowCutOutShapeBackground);
-
-		const ImVec2 vecTitleSize = FONT::pMenu[C_GET(int, Vars.nDpiScale)]->CalcTextSizeA(12.f * flDpiScale, FLT_MAX, -1.f, CS_XOR("asphyxia"));
-		pDrawList->AddText(ImVec2(vecMenuPos.x + vecMenuSize.x - style.WindowPadding.x - vecTitleSize.x, vecMenuPos.y + style.WindowPadding.y), ImGui::GetColorU32(ImGuiCol_Text), CS_XOR("asphyxia"));
 
 		static const CTab arrTabs[] = {
 			//{ "ragebot", &T::RageBot },
