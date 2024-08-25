@@ -50,7 +50,11 @@ void  F::LEGITBOT::AIM::Triggerbot(CBaseUserCmdPB* pCmd, C_CSPlayerPawn* pLocalP
 	auto weapon = pLocalPawn->GetActiveWeapon();
     if (!weapon)
         return;
-    vecForward *= weapon->GetRange();
+	auto data = weapon->GetWeaponVData();
+    if (!data)
+        return;
+	
+    vecForward *= data->GetRange();
     Vector_t vecStart = pLocalPawn->GetEyePosition();
     Vector_t vecEnd = vecStart + vecForward;
 	I::GameTraceManager->TraceShape(&ray, vecStart, vecEnd, &filter, &trace);
