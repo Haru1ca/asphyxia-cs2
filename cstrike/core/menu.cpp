@@ -784,7 +784,29 @@ void menu::render()
 		return;
 	MENU::UpdateStyle(&style);
 
-	ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(720, 355));
+	// @test: we should always update the animation?
+	animMenuDimBackground.Update(io.DeltaTime, style.AnimationSpeed);
+	if (!bMainWindowOpened)
+		return;
+
+	const ImVec2 vecScreenSize = io.DisplaySize;
+	const float flBackgroundAlpha = animMenuDimBackground.GetValue(1.f);
+	flDpiScale = D::CalculateDPI(C_GET(int, Vars.nDpiScale));
+
+	// @note: we call this every frame because we utilizing rainbow color as well! however it's not really performance friendly?
+	UpdateStyle(&style);
+
+	if (flBackgroundAlpha > 0.f)
+	{
+		if (C_GET(unsigned int, Vars.bMenuAdditional) & MENU_ADDITION_DIM_BACKGROUND)
+			D::AddDrawListRect(ImGui::GetBackgroundDrawList(), ImVec2(0, 0), vecScreenSize, C_GET(ColorPickerVar_t, Vars.colPrimtv1).colValue.Set<COLOR_A>(125 * flBackgroundAlpha), DRAW_RECT_FILLED);
+
+		if (C_GET(unsigned int, Vars.bMenuAdditional) & MENU_ADDITION_BACKGROUND_PARTICLE)
+			menuParticle.Render(ImGui::GetBackgroundDrawList(), vecScreenSize, flBackgroundAlpha);
+	}
+
+	ImGui::PushStyleVar(ImGuiStyleVar_Alpha, flBackgroundAlpha);
+	//ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(720, 355));
 
 	ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x / 2.f, io.DisplaySize.y / 2.f), ImGuiCond_Once, ImVec2(0.5f, 0.5f));
 	ImGui::SetNextWindowSize(ImVec2(720 * MENU::flDpiScale, 355 * MENU::flDpiScale), ImGuiCond_Always);
