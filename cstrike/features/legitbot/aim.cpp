@@ -47,7 +47,7 @@ void  F::LEGITBOT::AIM::Triggerbot(CBaseUserCmdPB* pCmd, C_CSPlayerPawn* pLocalP
 	C_CSPlayerPawn* pEntity = (C_CSPlayerPawn*)I::GameResourceService->pGameEntitySystem->Get(iIDEntIndex);
 	if (pEntity == nullptr)
 		return;
-	if (pEntity->GetTeam() == 0 || pEntity->GetHealth() =< 0)
+	if (pEntity->GetTeam() == 0 || pEntity->GetHealth() <= 0)
         return;
     if (!pLocalPawn->IsOtherEnemy(pEntity))
         return;
