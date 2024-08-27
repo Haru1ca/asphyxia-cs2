@@ -50,11 +50,13 @@ bool H::Setup()
 	}
 	L_PRINT(LOG_INFO) << CS_XOR("minhook initialization completed");
 
+	//if (!hkPresent.Create(MEM::FindPattern(GAMEOVERLAYRENDERER_DLL, CS_XOR("48 89 6C 24 ? 48 89 74 24 ? 41 56 48 83 EC ?")), reinterpret_cast<void*>(&Present)))
 	if (!hkPresent.Create(MEM::GetVFunc(I::SwapChain->pDXGISwapChain, VTABLE::D3D::PRESENT), reinterpret_cast<void*>(&Present)))
 		return false;
 	L_PRINT(LOG_INFO) << CS_XOR("\"Present\" hook has been created");
-
-	if (!hkResizeBuffers.Create(MEM::GetVFunc(I::SwapChain->pDXGISwapChain, VTABLE::D3D::RESIZEBUFFERS), reinterpret_cast<void*>(&ResizeBuffers)))
+	// WE USE STEAM OVERLAY
+	if (!hkResizeBuffers.Create(MEM::FindPattern(GAMEOVERLAYRENDERER_DLL, CS_XOR("48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 57 41 56 41 57 48 83 EC 30 44 8B FA")), reinterpret_cast<void*>(&ResizeBuffers)))
+	//if (!hkResizeBuffers.Create(MEM::GetVFunc(I::SwapChain->pDXGISwapChain, VTABLE::D3D::RESIZEBUFFERS), reinterpret_cast<void*>(&ResizeBuffers)))
 		return false;
 	L_PRINT(LOG_INFO) << CS_XOR("\"ResizeBuffers\" hook has been created");
 
