@@ -114,7 +114,7 @@ void F::MISC::MOVEMENT::ValidateUserCommand(CUserCmd* pCmd, CBaseUserCmdPB* pUse
 	pUserCmd->pInButtonState->nValue &= (~IN_FORWARD | ~IN_BACK | ~IN_LEFT | ~IN_RIGHT);
 
 	// re-store buttons by active forward/side moves
-	if (pUserCmd->flForwardMove > 0.0f)
+	if (pUserCmd->flForwardMove >= 0.0f)
 		pUserCmd->pInButtonState->nValue |= IN_FORWARD;
 	else if (pUserCmd->flForwardMove < 0.0f)
 		pUserCmd->pInButtonState->nValue |= IN_BACK;
