@@ -37,32 +37,20 @@ void  F::LEGITBOT::AIM::Triggerbot(CBaseUserCmdPB* pCmd, C_CSPlayerPawn* pLocalP
 	// Check if the activation key is down
 	if (!IPT::IsKeyDown(C_GET(unsigned int, Vars.nTriggerbotActivationKey)))
 		return;
-    /*if ((pLocalPawn->m_holdTargetIDTimer().m_timestamp() - pLocalPawn->m_delayTargetIDTimer().m_timestamp() + 0.3) < C_GET(float, Vars.flTriggerbotDelay))
-        return;*/
-	GameTrace_t trace = GameTrace_t();
-	TraceFilter_t filter = TraceFilter_t(0x1C3003, pLocalPawn, nullptr, 4);
-	Ray_t ray = Ray_t();
-	QAngle_t vCurAngle = pCmd->pViewAngles->angValue;
-	Vector_t vecForward = { };
-    vCurAngle.ToDirections(&vecForward);
-
-    CPlayer_WeaponServices* WeaponServices = pLocalPawn->GetWeaponServices();
-    if (!WeaponServices)
+    if ((pLocalPawn->m_holdTargetIDTimer().m_timestamp() - pLocalPawn->m_delayTargetIDTimer().m_timestamp() + 0.3) < C_GET(float, Vars.flTriggerbotDelay))
         return;
-    C_CSWeaponBase* ActiveWeapon = I::GameResourceService->pGameEntitySystem->Get<C_CSWeaponBase>(WeaponServices->GetActiveWeapon());
-
-    if (!ActiveWeapon)
+ 	int iIDEntIndex = pLocalPawn->m_iIDEntIndex();
+	if (iIDEntIndex == -1)
+    	return;
+    if ((pLocalPawn->m_holdTargetIDTimer().m_timestamp() - pLocalPawn->m_delayTargetIDTimer().m_timestamp() + 0.3) < C_GET(float, Vars.flTriggerbotDelay))
         return;
-	auto data = ActiveWeapon->GetWeaponVData();
-    if (!data)
-        return;
-	
-    vecForward *= data->GetRange();
-    Vector_t vecStart = pLocalPawn->GetEyePosition();
-    Vector_t vecEnd = vecStart + vecForward;
-	I::GameTraceManager->TraceShape(&ray, vecStart, vecEnd, &filter, &trace);
-	if (!trace.m_pHitEntity || trace.m_pHitEntity->GetRefEHandle().GetEntryIndex() != pLocalPawn->GetRefEHandle().GetEntryIndex())// if invisible, skip this entity
+	C_CSPlayerPawn* pEntity = (C_CSPlayerPawn*)I::GameResourceService->pGameEntitySystem->Get(iIDEntIndex);
+	if (pEntity == nullptr)
 		return;
+	if (pEntity->GetTeam() == 0 || pEntity->GetHealth() =< 0)
+        return;
+    if (!pLocalPawn->IsOtherEnemy(pEntity))
+        return;
 
     I::Input->GetUserCmd()->csgoUserCmd.pBaseCmd->pInButtonState->nValue |= IN_ATTACK;
 }
