@@ -27,7 +27,7 @@
 #define RENDERSYSTEM_DLL CS_XOR(L"rendersystemdx11.dll")
 #define LOCALIZE_DLL CS_XOR(L"localize.dll")
 #define DBGHELP_DLL CS_XOR(L"dbghelp.dll")
-#define GAMEOVERLAYRENDERER_DLL CS_XOR(L"GameOverlayRenderer64.dll")
+#define GAMEOVERLAYRENDERER_DLL CS_XOR(L"gameoverlayrenderer64.dll")
 #define PARTICLES_DLL CS_XOR(L"particles.dll")
 #define SCENESYSTEM_DLL CS_XOR(L"scenesystem.dll")
 #define MATERIAL_SYSTEM2_DLL CS_XOR(L"materialsystem2.dll")
