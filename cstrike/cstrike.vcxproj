@@ -162,7 +162,6 @@
     <ClInclude Include="core\variables.h" />
     <ClInclude Include="features.h" />
     <ClInclude Include="features\CRC.h" />
-    <ClInclude Include="features\antiaim\antiaim.hpp" />
     <ClInclude Include="features\legitbot\aim.h" />
     <ClInclude Include="features\legitbot\legitbot.h" />
     <ClInclude Include="features\misc.h" />
@@ -248,7 +247,6 @@
     <ClCompile Include="core\schema.cpp" />
     <ClCompile Include="core\sdk.cpp" />
     <ClCompile Include="features.cpp" />
-    <ClCompile Include="features\antiaim\antiaim.cpp" />
     <ClCompile Include="features\misc.cpp" />
     <ClCompile Include="features\misc\movement.cpp" />
     <ClCompile Include="features\visuals.cpp" />
