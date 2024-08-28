@@ -483,6 +483,7 @@ void T::Miscellaneous()
 			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(style.FramePadding.x, 0));
 
 			ImGui::Checkbox(CS_XOR("watermark"), &C_GET(bool, Vars.bWatermark));
+            ImGui::Checkbox(CS_XOR("anti-untrusted"), &C_GET(bool, Vars.bAntiUntrusted));
 
 			/*ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.f, 1.f, 0.f, 1.f));
 			if (ImGui::Button(CS_XOR("unlock hidden cvars"), ImVec2(-1, 15 * MENU::flDpiScale)))
