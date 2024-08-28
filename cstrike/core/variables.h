@@ -67,6 +67,7 @@ struct Variables_t
 #pragma region variables_misc
 	C_ADD_VARIABLE(bool, bAntiUntrusted, true);
 	C_ADD_VARIABLE(bool, bWatermark, true);
+    C_ADD_VARIABLE(bool, bAntiAim, false);
 
 	C_ADD_VARIABLE(bool, bAutoBHop, false);
 	C_ADD_VARIABLE(int, nAutoBHopChance, 100);
