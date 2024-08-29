@@ -37,8 +37,6 @@ void  F::LEGITBOT::AIM::Triggerbot(CBaseUserCmdPB* pCmd, C_CSPlayerPawn* pLocalP
 	// Check if the activation key is down
 	if (!IPT::IsKeyDown(C_GET(unsigned int, Vars.nTriggerbotActivationKey)))
 		return;
-    if ((pLocalPawn->m_holdTargetIDTimer().m_timestamp() - pLocalPawn->m_delayTargetIDTimer().m_timestamp() + 0.3) < C_GET(float, Vars.flTriggerbotDelay))
-        return;
  	int iIDEntIndex = pLocalPawn->m_iIDEntIndex();
 	if (iIDEntIndex == -1)
     	return;
@@ -217,7 +215,7 @@ void F::LEGITBOT::AIM::AimAssist(CBaseUserCmdPB* pUserCmd, C_CSPlayerPawn* pLoca
 	const float flSmoothing = C_GET(float, Vars.flSmoothing);
 
 	// Apply smoothing and set angles
-	pViewAngles->x += (vNewAngles.x / flSmoothing) - aimPunch.x ; // minus AimPunch angle to counteract recoil
+	pViewAngles->x += (vNewAngles.x / flSmoothing) - (aimPunch.x / ((flSmoothing + 10) * 0.1)) ; // minus AimPunch angle to counteract recoil
 	pViewAngles->y += (vNewAngles.y / flSmoothing) - aimPunch.y;
 	pViewAngles->Normalize();
 }
