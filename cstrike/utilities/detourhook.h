@@ -2,7 +2,7 @@
 // used: [ext] minhook
 // @credits: https://github.com/TsudaKageyu/minhook
 #include "../../dependencies/minhook/minhook.h"
-
+#include "../../dependencies/Vook.h"
 // used: l_print
 #include "log.h"
 
@@ -10,6 +10,37 @@ template <typename T>
 class CBaseHookObject
 {
 public:
+	bool Vreate(void* pFunction, void* pDetour)
+	{
+		if (pFunction == nullptr || pDetour == nullptr)
+			return false;
+
+		pBaseFn = pFunction;
+		pReplaceFn = pDetour;
+		if (!Vook ::Hook(
+			pBaseFn, // The initial function's address
+			pReplaceFn, // The hook's address
+			&pOriginalFn // The original's address
+			))
+		//if (const MH_STATUS status = MH_CreateHook(pBaseFn, pReplaceFn, &pOriginalFn); status != MH_OK)
+		{
+			/*
+#ifdef _DEBUG
+			L_PRINT(LOG_ERROR) << CS_XOR("failed to create hook, status: \"") << MH_StatusToString(status) << CS_XOR("\" with base address: ") << L::AddFlags(LOG_MODE_INT_SHOWBASE | LOG_MODE_INT_FORMAT_HEX) << reinterpret_cast<std::uintptr_t>(pBaseFn);
+#else
+			L_PRINT(LOG_ERROR) << CS_XOR("failed to create hook");
+#endif
+*/
+			L_PRINT(LOG_ERROR) << CS_XOR("failed to create hook");
+			CS_ASSERT(false);
+			return false;
+		}
+
+		//if (!Replace())
+		//return false;
+
+		return true;
+	}
 	/// setup hook and replace function
 	/// @returns: true if hook has been successfully created, false otherwise
 	bool Create(void* pFunction, void* pDetour)
@@ -22,12 +53,12 @@ public:
 
 		if (const MH_STATUS status = MH_CreateHook(pBaseFn, pReplaceFn, &pOriginalFn); status != MH_OK)
 		{
+
 #ifdef _DEBUG
 			L_PRINT(LOG_ERROR) << CS_XOR("failed to create hook, status: \"") << MH_StatusToString(status) << CS_XOR("\" with base address: ") << L::AddFlags(LOG_MODE_INT_SHOWBASE | LOG_MODE_INT_FORMAT_HEX) << reinterpret_cast<std::uintptr_t>(pBaseFn);
 #else
 			L_PRINT(LOG_ERROR) << CS_XOR("failed to create hook");
 #endif
-
 			CS_ASSERT(false);
 			return false;
 		}
@@ -67,6 +98,31 @@ public:
 		return true;
 	}
 
+		bool Vemove()
+	{
+		// restore it at first
+		//if (!Restore())
+		//return false;
+		if (!Vook::Unhook(
+			pBaseFn // The initial function's address
+			))
+		//if (const MH_STATUS status = MH_RemoveHook(pBaseFn); status != MH_OK)
+		{
+			/*
+#ifdef _DEBUG
+			L_PRINT(LOG_ERROR) << CS_XOR("failed to remove hook, status: \"") << MH_StatusToString(status) << CS_XOR("\" with base address: ") << L::AddFlags(LOG_MODE_INT_SHOWBASE | LOG_MODE_INT_FORMAT_HEX) << reinterpret_cast<std::uintptr_t>(pBaseFn);
+#else
+			L_PRINT(LOG_ERROR) << CS_XOR("failed to remove hook");
+#endif
+*/
+			L_PRINT(LOG_ERROR) << CS_XOR("failed to remove hook");
+			CS_ASSERT(false);
+			return false;
+		}
+
+		return true;
+	}
+
 	/// restore original function call and cleanup hook data
 	/// @returns: true if hook has been successfully removed, false otherwise
 	bool Remove()
@@ -74,15 +130,14 @@ public:
 		// restore it at first
 		if (!Restore())
 			return false;
-
 		if (const MH_STATUS status = MH_RemoveHook(pBaseFn); status != MH_OK)
 		{
+
 #ifdef _DEBUG
 			L_PRINT(LOG_ERROR) << CS_XOR("failed to remove hook, status: \"") << MH_StatusToString(status) << CS_XOR("\" with base address: ") << L::AddFlags(LOG_MODE_INT_SHOWBASE | LOG_MODE_INT_FORMAT_HEX) << reinterpret_cast<std::uintptr_t>(pBaseFn);
 #else
 			L_PRINT(LOG_ERROR) << CS_XOR("failed to remove hook");
 #endif
-
 			CS_ASSERT(false);
 			return false;
 		}
