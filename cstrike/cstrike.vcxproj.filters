@@ -25,9 +25,6 @@
     <Filter Include="features\visuals">
       <UniqueIdentifier>{9A07E0F7-8600-FF49-AF32-E4CE9B8ADE55}</UniqueIdentifier>
     </Filter>
-    <Filter Include="resources">
-      <UniqueIdentifier>{202B5BA7-8C95-0F1E-D5D3-C0C3417DED72}</UniqueIdentifier>
-    </Filter>
     <Filter Include="sdk">
       <UniqueIdentifier>{67A9880B-D3B2-887C-5C2E-9F7CC836947C}</UniqueIdentifier>
     </Filter>
@@ -42,6 +39,9 @@
     </Filter>
     <Filter Include="features\legitbot">
       <UniqueIdentifier>{a0df371b-f244-4c53-b08d-762a0f9b6b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dependencies\resources">
+      <UniqueIdentifier>{202B5BA7-8C95-0F1E-D5D3-C0C3417DED72}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -112,16 +112,16 @@
       <Filter>dependencies</Filter>
     </ClInclude>
     <ClInclude Include="..\resources\fa_solid_900.h">
-      <Filter>resources</Filter>
+      <Filter>dependencies\resources</Filter>
     </ClInclude>
     <ClInclude Include="..\resources\font_awesome_5.h">
-      <Filter>resources</Filter>
+      <Filter>dependencies\resources</Filter>
     </ClInclude>
     <ClInclude Include="..\resources\game_icons.h">
-      <Filter>resources</Filter>
+      <Filter>dependencies\resources</Filter>
     </ClInclude>
     <ClInclude Include="..\resources\smallest_pixel.h">
-      <Filter>resources</Filter>
+      <Filter>dependencies\resources</Filter>
     </ClInclude>
     <ClInclude Include="common.h" />
     <ClInclude Include="core.h" />
@@ -322,6 +322,13 @@
     </ClInclude>
     <ClInclude Include="features\legitbot\aim.h">
       <Filter>features\legitbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\resources\HarmonySans.h" />
+    <ClInclude Include="..\resources\shigure.h">
+      <Filter>dependencies\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\dependencies\Vook.h">
+      <Filter>dependencies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
