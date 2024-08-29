@@ -215,8 +215,8 @@ void F::LEGITBOT::AIM::AimAssist(CBaseUserCmdPB* pUserCmd, C_CSPlayerPawn* pLoca
 	const float flSmoothing = C_GET(float, Vars.flSmoothing);
 
 	// Apply smoothing and set angles
-	pViewAngles->x += (vNewAngles.x / flSmoothing) - (aimPunch.x / ((flSmoothing + 10) * 0.1)) ; // minus AimPunch angle to counteract recoil
-	pViewAngles->y += (vNewAngles.y / flSmoothing) - aimPunch.y;
+	pViewAngles->x += (vNewAngles.x / flSmoothing) - (aimPunch.x / ((flSmoothing + 9) * 0.1)) ; // minus AimPunch angle to counteract recoil
+	pViewAngles->y += (vNewAngles.y / flSmoothing) - (aimPunch.y / ((flSmoothing + 9) * 0.1));
 	pViewAngles->Normalize();
 }
 
