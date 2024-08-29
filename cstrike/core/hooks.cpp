@@ -289,35 +289,6 @@ void CS_FASTCALL H::OverrideView(void* pClientModeCSNormal, CViewSetup* pSetup)
 	const auto oOverrideView = hkOverrideView.GetOriginal();
 	if (!I::Engine->IsConnected() || !I::Engine->IsInGame())
 		return hkOverrideView.GetOriginal()(pClientModeCSNormal, pSetup);
-	if (!SDK::LocalController->IsPawnAlive() || !SDK::LocalController)
-		return hkOverrideView.GetOriginal()(pClientModeCSNormal, pSetup);
-
-	static auto progress = 0.f;
-	if (C_GET(bool, Vars.bThirdperson))
-	{
-		auto bezier = [](const float t)
-		{
-			return t * t * (3.0f - 2.0f * t);
-		};
-
-		progress = MATH::clamp(progress + I::GlobalVars->flFrameTime * 6.f, 40.f / C_GET(float, Vars.flThirdpersonDistance), 1.f);
-
-		CONVAR::cam_idealdist->value.fl = C_GET(float, Vars.flThirdpersonDistance) * (C_GET(bool, Vars.bThirdpersonNoInterp) ? 1.f : bezier(progress));
-		CONVAR::cam_collision->value.i1 = C_GET(bool, Vars.bThirdpersonCollision);
-		CONVAR::cam_snapto->value.i1 = true;
-		CONVAR::c_thirdpersonshoulder->value.i1 = true;
-		CONVAR::c_thirdpersonshoulderaimdist->value.fl = 0.f;
-		CONVAR::c_thirdpersonshoulderdist->value.fl = 0.f;
-		CONVAR::c_thirdpersonshoulderheight->value.fl = 0.f;
-		CONVAR::c_thirdpersonshoulderoffset->value.fl = 0.f;
-
-		I::Input->bInThirdPerson = true;
-	}
-	else
-	{
-		progress = C_GET(bool, Vars.bThirdperson) ? 1.f : 0.f;
-		I::Input->bInThirdPerson = false;
-	}
 	oOverrideView(pClientModeCSNormal, pSetup);
 }
 
