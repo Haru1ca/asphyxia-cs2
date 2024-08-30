@@ -9,7 +9,8 @@
 #include "visuals/chams.h"
 
 #include "../core/sdk.h"
-
+#include "../core/variables.h"
+#include "legitbot/aimRangePainter.hpp"
 using namespace F;
 
 bool F::VISUALS::Setup()
@@ -41,7 +42,9 @@ void VISUALS::OnFrame(const int nStage)
 		 * this means that we should always reset draw data from previous frame and re-store it again
 		 */
 		D::ResetDrawData();
-
+        if (C_GET(bool, Vars.bShowRange))
+			AimRangePainter aimRangePainter;
+            aimRangePainter.Draw(D::pDrawListActive);
 		if (CCSPlayerController* pLocal = CCSPlayerController::GetLocalPlayerController(); pLocal != nullptr)
 		{
 			OVERLAY::OnFrameStageNotify(pLocal);
