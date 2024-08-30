@@ -112,6 +112,7 @@ struct Variables_t
 #pragma endregion
 #pragma region variables_legitbot
 	C_ADD_VARIABLE(bool, bLegitbot, false);
+    C_ADD_VARIABLE(bool, bShowRange, false);
 	C_ADD_VARIABLE(float, flAimRange, 10.0f);
 	C_ADD_VARIABLE(float, flSmoothing, 10.0f);
 	C_ADD_VARIABLE(bool, bSilentbot, false);
