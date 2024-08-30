@@ -42,8 +42,8 @@ void VISUALS::OnFrame(const int nStage)
 		 * this means that we should always reset draw data from previous frame and re-store it again
 		 */
 		D::ResetDrawData();
+		AimRangePainter aimRangePainter;
 		if (C_GET(bool, Vars.bShowRange))
-			AimRangePainter aimRangePainter;
 			aimRangePainter.Draw(D::pDrawListActive);
 		if (CCSPlayerController* pLocal = CCSPlayerController::GetLocalPlayerController(); pLocal != nullptr)
 		{
