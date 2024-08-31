@@ -50,7 +50,7 @@ void  F::LEGITBOT::AIM::Triggerbot(CBaseUserCmdPB* pCmd, C_CSPlayerPawn* pLocalP
     if (!pLocalPawn->IsOtherEnemy(pEntity))
         return;
 
-    I::Input->GetUserCmd()->csgoUserCmd.pBaseCmd->pInButtonState->nValue |= IN_ATTACK;
+    pCmd->pInButtonState->nValue |= IN_ATTACK;
 }
 
 QAngle_t GetRecoil(CBaseUserCmdPB* pCmd,C_CSPlayerPawn* pLocal)
