@@ -40,8 +40,8 @@ void  F::LEGITBOT::AIM::Triggerbot(CBaseUserCmdPB* pCmd, C_CSPlayerPawn* pLocalP
  	int iIDEntIndex = pLocalPawn->m_iIDEntIndex();
 	if (iIDEntIndex == -1)
     	return;
-    if ((pLocalPawn->m_holdTargetIDTimer().m_timestamp() - pLocalPawn->m_delayTargetIDTimer().m_timestamp() + 0.3) < C_GET(float, Vars.flTriggerbotDelay))
-        return;
+    /*if ((pLocalPawn->m_holdTargetIDTimer().m_timestamp() - pLocalPawn->m_delayTargetIDTimer().m_timestamp() + 0.3) < C_GET(float, Vars.flTriggerbotDelay))
+        return;*/
 	C_CSPlayerPawn* pEntity = (C_CSPlayerPawn*)I::GameResourceService->pGameEntitySystem->Get(iIDEntIndex);
 	if (pEntity == nullptr)
 		return;
