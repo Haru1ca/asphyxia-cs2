@@ -106,7 +106,7 @@ void MENU::RenderMainWindow()
 	}
 
 	// render main window
-	ImGui::Begin(CS_XOR("asphyxia"), &bMainWindowOpened, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoCollapse);
+	ImGui::Begin(CS_XOR("astolfo"), &bMainWindowOpened, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoCollapse);
 	{
 		const ImVec2 vecMenuPos = ImGui::GetWindowPos();
 		const ImVec2 vecMenuSize = ImGui::GetWindowSize();
@@ -226,9 +226,9 @@ void MENU::RenderWatermark()
 		if (I::Engine->IsInGame())
 			ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), CS_XOR("in-game"));
 
-		static ImVec2 vecNameSize = ImGui::CalcTextSize(CS_XOR("asphyxia | " __DATE__ " " __TIME__));
+		static ImVec2 vecNameSize = ImGui::CalcTextSize(CS_XOR("astolfo | " __DATE__ " " __TIME__));
 		ImGui::SameLine(ImGui::GetContentRegionMax().x - vecNameSize.x - style.FramePadding.x);
-		ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 1.0f), CS_XOR("asphyxia | " __DATE__ " " __TIME__));
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 1.0f), CS_XOR("astolfo | " __DATE__ " " __TIME__));
 	}
 	ImGui::EndMainMenuBar();
 	ImGui::PopFont();
@@ -353,7 +353,7 @@ void T::RageBot()
 void T::LegitBot()
 {
 	ImGuiStyle& style = ImGui::GetStyle();
-	ImGui::Columns(2, CS_XOR("##legit_collumns"), false);
+	ImGui::Columns(1, CS_XOR("##legit_collumns"), false);
 	{
 		ImGui::BeginChild(CS_XOR("legitbot.aimbot"), ImVec2{}, true, ImGuiWindowFlags_MenuBar);
 		{
@@ -366,6 +366,7 @@ void T::LegitBot()
 			ImGui::Checkbox(CS_XOR("enable##aimbot"), &C_GET(bool, Vars.bLegitbot));
 			ImGui::SliderFloat(CS_XOR("aim range"), &C_GET(float, Vars.flAimRange), 0.f, 135.f);
 			ImGui::SliderFloat(CS_XOR("smooth"), &C_GET(float, Vars.flSmoothing), 1.f, 100.f);
+			ImGui::NewLine();
 			ImGui::Checkbox(CS_XOR("show range"), &C_GET(bool, Vars.bShowRange));
 
 			ImGui::NewLine();
@@ -385,7 +386,7 @@ void T::LegitBot()
 		ImGui::EndChild();
 
 	}
-	ImGui::NextColumn();
+	/*ImGui::NextColumn();
 	{ 
 		
 		ImGui::BeginChild(CS_XOR("legitbot.triggerbot"), ImVec2{}, true, ImGuiWindowFlags_MenuBar);
@@ -404,7 +405,7 @@ void T::LegitBot()
 			ImGui::PopStyleVar();
 		}
 		ImGui::EndChild();
-	}
+	} */
 	ImGui::Columns(1);
 }
 
